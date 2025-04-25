@@ -1,0 +1,25 @@
+<h2>📄 View Charges</h2>
+
+<form method="POST">
+  <label>Enter Patient Username:</label><br>
+  <input name="username" required><br><br>
+  <button type="submit">Search</button>
+</form>
+
+{% if username %}
+  <h3>Charges for {{ username }}:</h3>
+  {% if charges %}
+    <ul>
+      {% for charge in charges %}
+        <li>${{ charge.amount }} by {{ charge.doctor }} on {{ charge.timestamp }}</li>
+      {% endfor %}
+    </ul>
+    <p><strong>Total Charged:</strong> ${{ total_charged }}</p>
+    <p><strong>Total Paid:</strong> ${{ total_paid }}</p>
+    <p><strong>Remaining Balance:</strong> ${{ balance }}</p>
+  {% else %}
+    <p>No charges found for this user.</p>
+  {% endif %}
+{% endif %}
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

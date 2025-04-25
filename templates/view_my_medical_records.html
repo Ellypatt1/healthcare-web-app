@@ -1,0 +1,41 @@
+<h2>🧾 My Medical Records</h2>
+
+{% if visits %}
+  {% for visit in visits %}
+    <div style="border:1px solid #ccc; padding:10px; margin-bottom:15px;">
+      <p><strong>Name:</strong> {{ visit.name }}</p>
+      <p><strong>Address:</strong> {{ visit.address }}</p>
+      <p><strong>Phone:</strong> {{ visit.phone }}</p>
+      <p><strong>Email:</strong> {{ visit.email }}</p>
+      <p><strong>SSN:</strong> {{ visit.ssn }}</p>
+      <p><strong>Insurance:</strong> {{ visit.insurance }}</p>
+      <p><strong>Created By:</strong> {{ visit.created_by }}</p>
+      <p><strong>Timestamp:</strong> {{ visit.timestamp }}</p>
+
+      {% if visit.nurse_entry %}
+        <h4>🩺 Nurse Entry</h4>
+        <ul>
+          <li><strong>Weight:</strong> {{ visit.nurse_entry.weight }} kg</li>
+          <li><strong>Height:</strong> {{ visit.nurse_entry.height }} cm</li>
+          <li><strong>BP:</strong> {{ visit.nurse_entry.blood_pressure }}</li>
+          <li><strong>Pulse:</strong> {{ visit.nurse_entry.pulse }}</li>
+          <li><strong>Reason:</strong> {{ visit.nurse_entry.reason }}</li>
+          <li><strong>Nurse:</strong> {{ visit.nurse_entry.nurse }}</li>
+        </ul>
+      {% endif %}
+
+      {% if visit.doctor_entry %}
+        <h4>👨‍⚕️ Doctor Entry</h4>
+        <ul>
+          <li><strong>Treatment:</strong> {{ visit.doctor_entry.treatment }}</li>
+          <li><strong>Prescription:</strong> {{ visit.doctor_entry.prescription }}</li>
+          <li><strong>Doctor:</strong> {{ visit.doctor_entry.doctor }}</li>
+        </ul>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% else %}
+  <p>No medical records found.</p>
+{% endif %}
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

@@ -1,0 +1,19 @@
+<h2>❌ Cancel Appointment</h2>
+
+{% if appointments %}
+  <form method="POST">
+    <label for="cancel_index">Select an appointment to cancel:</label><br><br>
+    <select name="cancel_index" required>
+      {% for appt in appointments %}
+        <option value="{{ loop.index0 }}">
+          {{ appt.date }} at {{ appt.time }} with {{ appt.doctor }} – {{ appt.title }}
+        </option>
+      {% endfor %}
+    </select><br><br>
+    <button type="submit">Cancel Selected Appointment</button>
+  </form>
+{% else %}
+  <p>You have no appointments to cancel.</p>
+{% endif %}
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

@@ -1,0 +1,39 @@
+<h2>🛠️ CEO - Edit Employee Info</h2>
+
+<form method="POST">
+  <label>Select an employee to edit:</label><br>
+  <select name="username">
+    {% for uname, info in users.items() %}
+      {% if info.role in editable_roles %}
+        <option value="{{ uname }}" {% if uname == selected_user %}selected{% endif %}>
+          {{ uname }} ({{ info.role }})
+        </option>
+      {% endif %}
+    {% endfor %}
+  </select>
+  <button type="submit">Edit</button>
+</form>
+
+{% if selected_user %}
+  <h3>Editing: {{ selected_user }}</h3>
+  <form method="POST">
+    <input type="hidden" name="username" value="{{ selected_user }}">
+    <input type="hidden" name="save" value="1">
+
+    <label>Salary:</label><br>
+    <input name="salary" value="{{ user_info.salary }}"><br><br>
+
+    <label>Benefits:</label><br>
+    <input name="benefits" value="{{ user_info.benefits }}"><br><br>
+
+    <label>Department:</label><br>
+    <input name="department" value="{{ user_info.department }}"><br><br>
+
+    <label>Employment Type:</label><br>
+    <input name="employment_type" value="{{ user_info.employment_type }}"><br><br>
+
+    <button type="submit">💾 Save Changes</button>
+  </form>
+{% endif %}
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

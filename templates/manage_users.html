@@ -1,0 +1,30 @@
+<h2>👤 Manage Users</h2>
+
+<h3>Create New Employee</h3>
+<form method="POST">
+  Username: <input name="username" required><br><br>
+  Password: <input type="password" name="password" required><br><br>
+
+  Role:
+  <select name="role" required>
+    {% for r in roles %}
+      <option value="{{ r }}">{{ r }}</option>
+    {% endfor %}
+  </select><br><br>
+
+  Salary: <input name="salary"><br><br>
+  Benefits: <input name="benefits"><br><br>
+  Department: <input name="department"><br><br>
+  Employment Type: <input name="employment_type"><br><br>
+
+  <button type="submit">Create User</button>
+</form>
+
+<h3>📋 Current Users</h3>
+<ul>
+  {% for uname, info in users.items() %}
+    <li>{{ uname }} - {{ info.role }}</li>
+  {% endfor %}
+</ul>
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

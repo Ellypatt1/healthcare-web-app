@@ -1,0 +1,21 @@
+<h2>🔐 Failed Login Attempts</h2>
+
+{% if logs %}
+  {% for user, info in logs.items() %}
+    {% if info.log %}
+      <h3>{{ user }}</h3>
+      <ul>
+        {% for attempt in info.log %}
+          <li>
+            <strong>Time:</strong> {{ attempt.time }}<br>
+            <strong>Reason:</strong> {{ attempt.reason }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endfor %}
+{% else %}
+  <p>No login attempt logs found.</p>
+{% endif %}
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

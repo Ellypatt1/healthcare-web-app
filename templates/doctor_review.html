@@ -1,0 +1,38 @@
+<h2>👨‍⚕️ Review & Update Treatment</h2>
+
+<form method="POST">
+  <label>Enter Patient Username:</label><br>
+  <input name="username" required><br><br>
+  <button type="submit">Search</button>
+</form>
+
+{% if visit %}
+  <h3>Most Recent Visit for {{ visit.name }}</h3>
+
+  {% if visit.nurse_entry %}
+    <h4>🩺 Nurse Vitals</h4>
+    <ul>
+      <li>Weight: {{ visit.nurse_entry.weight }} kg</li>
+      <li>Height: {{ visit.nurse_entry.height }} cm</li>
+      <li>Blood Pressure: {{ visit.nurse_entry.blood_pressure }}</li>
+      <li>Pulse: {{ visit.nurse_entry.pulse }} bpm</li>
+      <li>Reason: {{ visit.nurse_entry.reason }}</li>
+    </ul>
+  {% else %}
+    <p>No nurse vitals found.</p>
+  {% endif %}
+
+  <h4>💊 Add Treatment & Prescription</h4>
+  <form method="POST">
+    <input type="hidden" name="username" value="{{ visit.name }}">
+    <label>Treatment Given:</label><br>
+    <input name="treatment" required><br><br>
+
+    <label>Prescription:</label><br>
+    <input name="prescription"><br><br>
+
+    <button type="submit">✅ Save</button>
+  </form>
+{% endif %}
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

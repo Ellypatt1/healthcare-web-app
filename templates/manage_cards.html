@@ -1,0 +1,36 @@
+<h2>💳 My Card Wallet</h2>
+
+{% if cards %}
+  <h3>Saved Cards:</h3>
+  <form method="POST">
+    <ul>
+      {% for number, info in cards.items() %}
+        <li>
+          {{ number }} ({{ info.name }}) – Expires: {{ info.expiry }}
+          <button name="delete_card" value="{{ number }}" style="margin-left:10px;">❌ Delete</button>
+        </li>
+      {% endfor %}
+    </ul>
+  </form>
+{% else %}
+  <p>No cards saved yet.</p>
+{% endif %}
+
+<h3>Add New Card</h3>
+<form method="POST">
+  Card Number (16 digits):<br>
+  <input name="number" required><br><br>
+
+  Expiration Date (MM/YY):<br>
+  <input name="expiry" required><br><br>
+
+  CVV (3 digits):<br>
+  <input name="cvv" required><br><br>
+
+  Name on Card:<br>
+  <input name="name" required><br><br>
+
+  <button type="submit">Add Card</button>
+</form>
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

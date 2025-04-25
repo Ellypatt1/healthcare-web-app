@@ -1,0 +1,33 @@
+<h2>💸 Make a Copay</h2>
+
+<p><strong>Total Charged:</strong> ${{ total_charged }}</p>
+<p><strong>Total Paid:</strong> ${{ total_paid }}</p>
+<p><strong>Remaining Balance:</strong> ${{ remaining_balance }}</p>
+
+{% if remaining_balance > 0 %}
+  <form method="POST">
+    <label>Select Card:</label><br>
+    <select name="card" required>
+      {% for card_number, card_info in cards.items() %}
+        <option value="{{ card_number }}">
+          {{ card_number }} ({{ card_info.name }})
+        </option>
+      {% endfor %}
+    </select><br><br>
+
+    <label>Expiration (MM/YY):</label><br>
+    <input name="expiry" required><br><br>
+
+    <label>CVV:</label><br>
+    <input name="cvv" required><br><br>
+
+    <label>Amount to Pay:</label><br>
+    <input type="number" name="amount" step="0.01" max="{{ remaining_balance }}" required><br><br>
+
+    <button type="submit">Pay Now</button>
+  </form>
+{% else %}
+  <p>✅ You have no outstanding charges.</p>
+{% endif %}
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

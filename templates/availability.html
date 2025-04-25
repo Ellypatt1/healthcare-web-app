@@ -1,0 +1,31 @@
+<h2>🔍 Check Doctor Availability</h2>
+
+<form method="POST">
+  <label>Select Date:</label><br>
+  <input type="date" name="date" required><br><br>
+
+  <label>Select Doctor:</label><br>
+  <select name="doctor" required>
+    {% for doc in doctors %}
+      <option value="{{ doc }}"
+        {% if selected_doctor == doc %}selected{% endif %}>{{ doc }}</option>
+    {% endfor %}
+  </select><br><br>
+
+  <button type="submit">Check Availability</button>
+</form>
+
+{% if selected_doctor and selected_date %}
+  <h3>🗓️ Availability for {{ selected_doctor }} on {{ selected_date }}</h3>
+  {% if available_slots %}
+    <ul>
+      {% for time in available_slots %}
+        <li>{{ time }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No available time slots for this doctor on that day.</p>
+  {% endif %}
+{% endif %}
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

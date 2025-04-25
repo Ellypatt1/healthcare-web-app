@@ -1,0 +1,42 @@
+<h2>🔄 Change Appointment</h2>
+
+{% if appointments %}
+  <form method="POST">
+    <label for="index">Choose appointment to change:</label><br><br>
+    <select name="index" required>
+      {% for appt in appointments %}
+        <option value="{{ loop.index0 }}">
+          {{ appt.date }} at {{ appt.time }} with {{ appt.doctor }} – {{ appt.title }}
+        </option>
+      {% endfor %}
+    </select><br><br>
+
+    <label>New Date:</label><br>
+    <input type="date" name="new_date" required><br><br>
+
+    <label>New Doctor:</label><br>
+    <select name="new_doctor" required>
+      {% for doc in doctors %}
+        <option value="{{ doc }}">{{ doc }}</option>
+      {% endfor %}
+    </select><br><br>
+
+    <label>New Time Slot:</label><br>
+    <select name="new_time" required>
+      <option value="09:00">09:00</option>
+      <option value="10:00">10:00</option>
+      <option value="11:00">11:00</option>
+      <option value="12:00">12:00</option>
+      <option value="13:00">13:00</option>
+      <option value="14:00">14:00</option>
+      <option value="15:00">15:00</option>
+      <option value="16:00">16:00</option>
+    </select><br><br>
+
+    <button type="submit">Save Changes</button>
+  </form>
+{% else %}
+  <p>No appointments to modify.</p>
+{% endif %}
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

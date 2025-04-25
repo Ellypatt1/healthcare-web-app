@@ -1,0 +1,26 @@
+<h2>📂 Patient Record List</h2>
+
+<form method="POST">
+  <label>Enter Patient Username:</label><br>
+  <input name="patient_username" required><br><br>
+  <button type="submit">Search</button>
+</form>
+
+{% if searched_username %}
+  <h3>Records for: {{ searched_username }}</h3>
+  {% if records %}
+    {% for visit in records %}
+      <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+        <p><strong>Name:</strong> {{ visit.name }}</p>
+        <p><strong>Reason:</strong> {{ visit.nurse_entry.reason if visit.nurse_entry }}</p>
+        <p><strong>Date:</strong> {{ visit.timestamp }}</p>
+        <p><strong>Doctor:</strong> {{ visit.doctor_entry.doctor if visit.doctor_entry }}</p>
+        <p><strong>Treatment:</strong> {{ visit.doctor_entry.treatment if visit.doctor_entry }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No records found.</p>
+  {% endif %}
+{% endif %}
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

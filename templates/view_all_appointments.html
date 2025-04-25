@@ -1,0 +1,22 @@
+<h2>📋 All Appointments ({{ role }} View)</h2>
+
+
+{% if all_appointments %}
+  {% for user, appts in all_appointments.items() %}
+    <h3>User: {{ user }}</h3>
+    <ul>
+      {% for appt in appts %}
+        <li>
+          <strong>Date:</strong> {{ appt.date }} |
+          <strong>Time:</strong> {{ appt.time }} |
+          <strong>Doctor:</strong> {{ appt.doctor }} |
+          <strong>Reason:</strong> {{ appt.title }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+{% else %}
+  <p>No appointments found.</p>
+{% endif %}
+
+<a href="/dashboard">🔙 Back to Dashboard</a>

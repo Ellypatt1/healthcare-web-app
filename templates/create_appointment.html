@@ -1,0 +1,57 @@
+<h2>🗓️ Book a New Appointment</h2>
+<form method="POST">
+  Reason for Visit: <input name="reason" required><br><br>
+
+  Date: <input type="date" name="date" id="dateInput" required><br><br>
+
+  Doctor:
+  <select name="doctor" id="doctorSelect" required>
+    {% for doc in doctors %}
+      <option value="{{ doc }}">{{ doc }}</option>
+    {% endfor %}
+  </select><br><br>
+
+  Time Slot:
+  <select name="time" id="timeSelect" required>
+    <option value="">Select a time</option>
+  </select><br><br>
+
+  <button type="submit">📅 Book Appointment</button>
+</form>
+
+<a href="/dashboard">🔙 Back to Dashboard</a>
+
+<script>
+  document.getElementById('doctorSelect').addEventListener('change', loadTimes);
+  document.getElementById('dateInput').addEventListener('change', loadTimes);
+
+  function loadTimes() {
+    const date = document.getElementById('dateInput').value;
+    const doctor = document.getElementById('doctorSelect').value;
+    if (!date || !doctor) return;
+
+    fetch('/get_available_times', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ date, doctor })
+    })
+    .then(res => res.json())
+    .then(times => {
+      const timeSelect = document.getElementById('timeSelect');
+      timeSelect.innerHTML = '';
+      if (times.length === 0) {
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = 'No available times';
+        timeSelect.appendChild(option);
+        return;
+      }
+      for (const time of times) {
+        const option = document.createElement('option');
+        option.value = time;
+        option.textContent = time;
+        timeSelect.appendChild(option);
+      }
+    });
+  }
+</script>
