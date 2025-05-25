@@ -1,7 +1,6 @@
 # 🩺 Secure Healthcare Web App
 
 Created by: Elly Patterson  
-Deployed at: https://healthcare-web-app.onrender.com
 
 ---
 
@@ -10,7 +9,6 @@ Deployed at: https://healthcare-web-app.onrender.com
 - Flask
 - HTML/CSS (Jinja2 templating)
 - JSON for encrypted data storage
-- Deployed using Render
 - GitHub for version control
 - Gunicorn for production server
 
