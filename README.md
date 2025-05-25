@@ -1,6 +1,8 @@
 # 🩺 Secure Healthcare Web App
 
 Created by: Elly Patterson  
+## Live Demo
+[Click here to view the live site](https://healthcare-web-app.onrender.com)
 
 ---
 
